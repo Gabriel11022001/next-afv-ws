@@ -1,0 +1,9 @@
+{
+    "ambiente": "desenvolvimento",
+    "banco_dados": {
+        "nome_banco": "db_next_afv",
+        "usuario": "root",
+        "senha": "root",
+        "host": "postgreSQL_db"
+    }
+}
