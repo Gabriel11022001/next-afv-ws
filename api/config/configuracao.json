@@ -5,5 +5,37 @@
         "usuario": "root",
         "senha": "root",
         "host": "postgreSQL_db"
-    }
+    },
+    "campos_obrigatorios": {
+        "endereco": {
+            "cep": true,
+            "endereco": true,
+            "bairro": true,
+            "cidade": true,
+            "complemento": false,
+            "numero": false,
+            "estado": true
+        },
+        "pessoa_fisica": {
+            "nome_completo": true,
+            "cpf": true,
+            "email": true,
+            "telefone_celular": true,
+            "telefone_fixo": true,
+            "telefone_complementar": false,
+            "data_nascimento": true,
+            "genero": true
+        },
+        "pessoa_juridica": {
+            "razao_social": true,
+            "cnpj": true,
+            "inscricao_estadual": true,
+            "link_site": false,
+            "email": true,
+            "telefone_celular": true,
+            "telefone_fixo": true,
+            "telefone_complementar": false
+        }
+    },
+    "permitir_vendas_offiline": true
 }

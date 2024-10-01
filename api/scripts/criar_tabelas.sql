@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS tb_usuarios(
     nome_completo VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     senha VARCHAR(255) NOT NULL,
+    telefone_celular VARCHAR(255) NOT NULL,
     nivel_acesso TEXT NOT NULL,
     ativo BOOLEAN NOT NULL DEFAULT true
 );

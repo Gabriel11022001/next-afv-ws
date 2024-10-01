@@ -12,6 +12,7 @@ try {
     if (empty($email) || empty($senha)) {
         response(true, 'Informe o e-mail e senha para realizar login.');
     } else {
+        $senha = md5($senha);
         $con = getConexaoBanco();
         $query = 'SELECT * FROM tb_usuarios WHERE email = :email AND senha = :senha';
         $stmt = $con->prepare($query);
@@ -26,7 +27,8 @@ try {
                 'nome_usuario_logado' => $usuario['nome_completo'],
                 'nivel_acesso_usuario_logado' => $usuario['nivel_acesso'],
                 'ativo' => $usuario['ativo'],
-                'ambiente' => ''
+                'ambiente' => '',
+                'telefone_celular' => $usuario['telefone_celular']
             ]);
         } else {
             response(true, 'E-mail ou senha inválidos.');
