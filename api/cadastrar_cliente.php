@@ -59,7 +59,40 @@ try {
             if ($stmt->fetch(PDO::FETCH_ASSOC)) {
                 response(true, 'Já existe um cliente cadastrado com esse cpf, informe outro cpf.');
             } else {
-                
+                // validar se já existe um cliente cadastrado com o e-mail informado
+                $stmt = $bancoDados->prepare('SELECT id FROM tb_clientes WHERE email = :email');
+                $stmt->bindValue(':email', $email);
+                $stmt->execute();
+
+                if ($stmt->fetch(PDO::FETCH_ASSOC)) {
+                    response(true, 'Já existe um cliente cadastrado com esse e-mail, informe outro e-mail.');
+                } else {
+                    $queryCadastrarClientePessoaFisica = 'INSERT INTO tb_clientes(tipo_pessoa, email, telefone_celular, telefone_complementar, telefone_fixo,
+                    nome_completo, cpf, data_nascimento, sexo)
+                    VALUES(:tipo_pessoa, :email, :telefone_celular, :telefone_complementar, :telefone_fixo, :nome_completo,
+                    :cpf, :data_nascimento, :sexo)';
+                    $stmt = $bancoDados->prepare($queryCadastrarClientePessoaFisica);
+                    $stmt->bindValue(':tipo_pessoa', $tipoCliente);
+                    $stmt->bindValue(':email', $email);
+                    $stmt->bindValue(':telefone_celular', $telefoneCelular);
+                    $stmt->bindValue(':telefone_complementar', $telefoneComplementar);
+                    $stmt->bindValue(':telefone_fixo', $telefoneFixo);
+                    $stmt->bindValue(':nome_completo', $nomeCompleto);
+                    $stmt->bindValue(':cpf', $cpf);
+                    $stmt->bindValue(':data_nascimento', $dataNascimento);
+                    $stmt->bindValue(':sexo', $genero);
+
+                    if ($stmt->execute()) {
+                        // registrar o endereço do cliente na base de dados
+                        $bancoDados->commit();
+                        response(true, 'Cliente cadastrado com sucesso.');
+                    } else {
+                        $bancoDados->rollBack();
+                        response(true, 'Ocorreu um erro ao tentar-se cadastrar o cliente.');
+                    }
+
+                }
+
             }
 
         }

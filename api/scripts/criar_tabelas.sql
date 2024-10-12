@@ -24,3 +24,23 @@ CREATE TABLE IF NOT EXISTS tb_clientes(
     inscricao_estadual TEXT,
     link_site TEXT
 );
+
+CREATE TABLE IF NOT EXISTS tb_categorias_produtos(
+    id SERIAL NOT NULL PRIMARY KEY,
+    descricao TEXT NOT NULL,
+    status BOOLEAN DEFAULT true
+);
+
+CREATE TABLE IF NOT EXISTS tb_produtos(
+    id SERIAL NOT NULL PRIMARY KEY,
+    nome_produto TEXT NOT NULL,
+    codigo TEXT,
+    codigo_barras TEXT,
+    status BOOLEAN DEFAULT true,
+    preco_venda DECIMAL NOT NULL,
+    preco_compra DECIMAL NOT NULL,
+    unidades_estoque INTEGER NOT NULL,
+    url_foto TEXT NOT NULL,
+    categoria_id INTEGER NOT NULL,
+    FOREIGN KEY(categoria_id) REFERENCES tb_categorias_produtos(id)
+);
