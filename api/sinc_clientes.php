@@ -26,7 +26,7 @@ try {
 
             $clientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
-            response(true, 'Clientes encontrados com sucesso!', $clientes);
+            response(true, 'Clientes obtidos com sucesso!', $clientes);
         }
 
     }
@@ -34,5 +34,5 @@ try {
 } catch (Exception $e) {
     // registrar o erro no arquivo de log
 
-    response(false, 'Ocorreu um erro ao tentar-se sincronizar os clientes. ' . $e->getMessage(), []);
+    response(false, 'Ocorreu um erro ao tentar-se sincronizar os clientes.', []);
 }
