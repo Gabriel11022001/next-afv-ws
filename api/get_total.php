@@ -19,6 +19,13 @@ try {
     $totais['total_clientes'] = $stmt->fetch(PDO::FETCH_ASSOC)['total_clientes'];
 
     // obter total de categorias de produtos cadastrados
+    $stmt = $bancoDados->prepare('SELECT COUNT(id) AS total_categorias FROM tb_categorias_produtos');
+    $stmt->execute();
+    $totais['total_categorias'] = $stmt->fetch(PDO::FETCH_ASSOC)['total_categorias'];
+
+    $stmt = $bancoDados->prepare('SELECT COUNT(id) AS total_produtos FROM tb_produtos');
+    $stmt->execute();
+    $totais['total_produtos'] = $stmt->fetch(PDO::FETCH_ASSOC)['total_produtos'];
 
     response(true, 'Totais obtidos com sucesso.', [
         'total_clientes' => $totais['total_clientes'],

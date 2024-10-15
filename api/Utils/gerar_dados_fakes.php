@@ -91,7 +91,7 @@ function gerarClientesFake(PDO $bancoDados) {
 
 function gerarCategoriasProdutosFake(PDO $bancoDados) {
 
-    for ($contador = 0; $contador < 1000; $contador++) {
+    for ($contador = 0; $contador < 10000; $contador++) {
         $stmt = $bancoDados->prepare('INSERT INTO tb_categorias_produtos(descricao) VALUES(:descricao)');
         $stmt->bindValue(':descricao', 'categoria teste ' . $contador + 1);
         
@@ -118,7 +118,8 @@ function gerarProdutosFake(PDO $bancoDados) {
             preco_compra,
             unidades_estoque,
             url_foto,
-            categoria_id
+            categoria_id,
+            codigo_barras
         ) VALUES(
             :nome_produto,
             :codigo,
@@ -127,7 +128,8 @@ function gerarProdutosFake(PDO $bancoDados) {
             :preco_compra,
             :unidades_estoque,
             :url_foto,
-            :categoria_id
+            :categoria_id,
+            :codigo_barras
         )');
 
         $stmt->bindValue(':nome_produto', 'produto ' . $contador + 1);
@@ -136,6 +138,7 @@ function gerarProdutosFake(PDO $bancoDados) {
         $stmt->bindValue(':preco_venda', $contador + 10.23);
         $stmt->bindValue(':preco_compra', $contador + 2.50);
         $stmt->bindValue(':unidades_estoque', $contador + 100);
+        $stmt->bindValue(':codigo_barras', md5($contador + 1));
 
         $status = rand(0, 1);
 
@@ -150,17 +153,17 @@ function gerarProdutosFake(PDO $bancoDados) {
         $idCategoria = 0;
 
         if ($contador < 100) {
-            $idCategoria = 1;
+            $idCategoria = 1001;
         } else if ($contador < 200) {
-            $idCategoria = 2;
+            $idCategoria = 1002;
         } else if ($contador < 300) {
-            $idCategoria = 3;
+            $idCategoria = 1003;
         } else if ($contador < 400) {
-            $idCategoria = 4;
+            $idCategoria = 1004;
         } else if ($contador < 500) {
-            $idCategoria = 5;
+            $idCategoria = 1005;
         } else {
-            $idCategoria = 6;
+            $idCategoria = 1006;
         }
 
         $stmt->bindValue(':categoria_id', $idCategoria);
