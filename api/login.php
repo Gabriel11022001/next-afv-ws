@@ -23,9 +23,10 @@ try {
 
         if (!empty($usuario)) {
             response(true, 'Login efetuado com sucesso.', [
-                'id_usuario_logado' => $usuario['id'],
-                'nome_usuario_logado' => $usuario['nome_completo'],
-                'nivel_acesso_usuario_logado' => $usuario['nivel_acesso'],
+                'email' => $email,
+                'id' => $usuario['id'],
+                'nome_completo' => $usuario['nome_completo'],
+                'nivel_acesso' => $usuario['nivel_acesso'],
                 'ativo' => $usuario['ativo'],
                 'ambiente' => '',
                 'telefone_celular' => $usuario['telefone_celular']
